@@ -71,3 +71,15 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 sections.forEach(s => sectionObserver.observe(s));
+
+// ── Analytics: Book a call clicks ──────────────────────────────────────────
+document.querySelectorAll('[data-analytics="book_a_call"]').forEach(el => {
+  el.addEventListener('click', () => {
+    if (typeof gtag === 'function') {
+      gtag('event', 'book_a_call_click', {
+        link_location: el.dataset.location,
+        link_url: el.href
+      });
+    }
+  });
+});
